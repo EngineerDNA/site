@@ -1,0 +1,116 @@
+{
+  "dev-server-diagnostics": {
+    "type": "workflow",
+    "enforcement": "suggest",
+    "priority": "high",
+    "promptTriggers": {
+      "keywords": [
+        "localhost",
+        "not loading",
+        "server not responding",
+        "connection refused",
+        "port 4321",
+        "blank page",
+        "can't connect",
+        "server down",
+        "dev server issue",
+        "Astro server",
+        "debug server",
+        "diagnose",
+        "troubleshoot"
+      ],
+      "intentPatterns": [
+        "localhost.*?(issue|problem|not working|error|won't load)",
+        "(server|Astro).*?(down|not responding|not working|issue)",
+        "can't.*?(connect|access).*?(localhost|server|4321)",
+        "(debug|diagnose|troubleshoot).*?(server|localhost)",
+        "connection.*?(refused|error|failed)"
+      ]
+    },
+    "fileTriggers": {
+      "pathPatterns": [],
+      "contentPatterns": []
+    }
+  },
+  "astro-website-development": {
+    "type": "reference",
+    "enforcement": "suggest",
+    "priority": "high",
+    "promptTriggers": {
+      "keywords": [
+        "Astro",
+        "component",
+        "page",
+        "layout",
+        "React island",
+        "TypeScript",
+        "frontend",
+        "website",
+        "UI",
+        "button",
+        "hero",
+        "section",
+        "Tailwind",
+        "CSS",
+        "npm",
+        "static site"
+      ],
+      "intentPatterns": [
+        "(create|implement|add|build).*?(page|component|layout|section)",
+        "(Astro|website).*?(component|page)",
+        "component.*?(create|add|build)",
+        "(style|CSS|Tailwind).*?(component|page)",
+        "React.*?island"
+      ]
+    },
+    "fileTriggers": {
+      "pathPatterns": [
+        "src/pages/**/*.astro",
+        "src/components/**/*.astro",
+        "src/components/**/*.tsx",
+        "src/layouts/**/*.astro"
+      ],
+      "contentPatterns": [
+        "---",
+        "Astro\\.props",
+        "client:load",
+        "client:visible",
+        "className="
+      ]
+    }
+  },
+  "using-claude-code": {
+    "type": "reference",
+    "enforcement": "suggest",
+    "priority": "medium",
+    "promptTriggers": {
+      "keywords": [
+        "claude code",
+        "hook",
+        "skill",
+        "agent",
+        "slash command",
+        "subagent",
+        "reference pattern",
+        "progressive disclosure",
+        "skill structure",
+        "skill authoring",
+        "SKILL.md",
+        "skill-rules.json"
+      ],
+      "intentPatterns": [
+        "(create|add|modify).*?(hook|skill|agent|command)",
+        "(how|use).*?(claude code|hook|skill)",
+        "skill.*(pattern|structure|organization)"
+      ]
+    },
+    "fileTriggers": {
+      "pathPatterns": [
+        ".claude/**/*.md",
+        ".claude/hooks/**/*.py",
+        ".claude/hooks/**/*.sh"
+      ],
+      "contentPatterns": []
+    }
+  }
+}

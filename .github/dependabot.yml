@@ -1,0 +1,22 @@
+version: 2
+
+updates:
+  # Enable version updates for npm dependencies
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      # Check for npm updates weekly on Mondays
+      interval: weekly
+      day: monday
+    # Target the main branch for dependency updates
+    target-branch: main
+    # Prefix commit messages with conventional commit format
+    commit-message:
+      prefix: "chore(deps)"
+    # Keep pull requests up to date with rebasing
+    rebase-strategy: auto
+    # Group all dependencies into a single PR where possible
+    groups:
+      dependencies:
+        patterns:
+          - "*"

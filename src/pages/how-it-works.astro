@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/base-layout.astro';
+import Header from '../components/header.astro';
+import Footer from '../components/footer.astro';
+import InstallButton from '../components/install-button';
+
+const steps = [
+  {
+    number: 1,
+    title: 'Install EngineerDNA',
+    description:
+      'Download the desktop app using your platform package manager. Takes less than 60 seconds.',
+  },
+  {
+    number: 2,
+    title: 'Launch the App',
+    description:
+      'EngineerDNA starts a local server and opens in your default browser at localhost:3847.',
+  },
+  {
+    number: 3,
+    title: 'Connect Your Tools',
+    description:
+      'Install plugins for GitHub, GitLab, Jira, or build custom integrations using our plugin API.',
+  },
+  {
+    number: 4,
+    title: 'View Metrics',
+    description:
+      'Real-time dashboard shows pull request analytics, cycle time, and team performance.',
+  },
+];
+
+const architecture = [
+  {
+    title: 'Desktop Application',
+    description:
+      'Native Go application with embedded web server. Runs entirely on your machine.',
+  },
+  {
+    title: 'Browser Interface',
+    description:
+      'React dashboard served from localhost:3847. Modern UI with real-time updates.',
+  },
+  {
+    title: 'Plugin System',
+    description:
+      'Extensible JSON-RPC based plugins. Connect to any tool or build your own.',
+  },
+  {
+    title: 'Local Database',
+    description:
+      'SQLite database for caching metrics. All data stays on your machine.',
+  },
+];
+---
+
+<BaseLayout
+  title="How It Works - EngineerDNA"
+  description="Learn how EngineerDNA works. Desktop app architecture, installation, and plugin system."
+>
+  <Header />
+
+  <main>
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-16 text-center">
+          <h1 class="mb-6 text-5xl font-bold text-text-primary">
+            How It Works
+          </h1>
+          <p class="text-xl text-text-secondary">
+            EngineerDNA is a desktop application that runs a local web server.
+            Install, launch, and view metrics in your browser.
+          </p>
+        </div>
+
+        <div class="mb-16">
+          <h2 class="mb-8 text-center text-3xl font-bold text-text-primary">
+            Getting Started
+          </h2>
+          <div class="space-y-12">
+            {
+              steps.map((step) => (
+                <div class="flex gap-6">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent-primary text-xl font-bold text-white">
+                    {step.number}
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="mb-2 text-xl font-semibold text-text-primary">
+                      {step.title}
+                    </h3>
+                    <p class="text-text-secondary">{step.description}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mb-16 rounded-lg bg-bg-secondary p-8 text-center">
+          <h3 class="mb-6 text-2xl font-bold text-text-primary">Install Now</h3>
+          <InstallButton client:load />
+        </div>
+
+        <div>
+          <h2 class="mb-8 text-center text-3xl font-bold text-text-primary">
+            Architecture
+          </h2>
+          <div class="grid gap-6 md:grid-cols-2">
+            {
+              architecture.map((item) => (
+                <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6">
+                  <h3 class="mb-3 text-xl font-semibold text-text-primary">
+                    {item.title}
+                  </h3>
+                  <p class="text-text-secondary">{item.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div
+          class="mt-16 rounded-lg border-l-4 border-accent-primary bg-bg-secondary p-6"
+        >
+          <h3 class="mb-2 text-lg font-semibold text-text-primary">
+            Privacy First
+          </h3>
+          <p class="text-text-secondary">
+            EngineerDNA runs entirely on your machine. No data is sent to
+            external servers. All metrics, plugin data, and configuration stay
+            on localhost:3847.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
