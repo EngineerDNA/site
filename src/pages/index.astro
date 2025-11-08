@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../layouts/base-layout.astro';
+import Header from '../components/header.astro';
+import Footer from '../components/footer.astro';
+import Hero from '../components/hero.astro';
+import InstallButton from '../components/install-button';
+---
+
+<BaseLayout
+  title="EngineerDNA - Open Source Engineering Metrics"
+  description="Desktop app for engineering metrics. Track pull requests, cycle time, and team performance. 100% open source, Apache 2.0 licensed."
+>
+  <Header />
+
+  <main>
+    <Hero />
+
+    <section class="bg-bg-secondary px-4 py-24 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <h2 class="mb-6 text-center text-4xl font-bold text-text-primary">
+          Engineering metrics shouldn't require<br />
+          a security review or a blank check
+        </h2>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          <div class="text-center">
+            <div class="mb-4 text-4xl">
+              <svg
+                class="mx-auto h-12 w-12 text-accent-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text-primary">
+              Your SRE team blocks SaaS tools
+            </h3>
+            <p class="text-text-secondary">
+              "We can't send pull request data to third-party servers."
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="mb-4 text-4xl">
+              <svg
+                class="mx-auto h-12 w-12 text-accent-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text-primary">
+              Tools cost $50-100/seat
+            </h3>
+            <p class="text-text-secondary">
+              That's $15k/year for a 20-person team. For dashboards.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="mb-4 text-4xl">
+              <svg
+                class="mx-auto h-12 w-12 text-accent-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text-primary">
+              Execs question velocity
+            </h3>
+            <p class="text-text-secondary">
+              You need data to defend your team, not anecdotes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-24 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <h2 class="mb-16 text-center text-4xl font-bold text-text-primary">
+          Built for engineering leaders
+        </h2>
+
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="rounded-lg bg-bg-secondary p-8">
+            <svg
+              class="mb-4 h-12 w-12 text-accent-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Install and run in 60 seconds
+            </h3>
+            <p class="text-text-secondary">
+              Desktop app like VS Code or Docker Desktop. No servers to
+              provision, no security reviews, no procurement process. Just
+              install and start syncing.
+            </p>
+          </div>
+
+          <div class="rounded-lg bg-bg-secondary p-8">
+            <svg
+              class="mb-4 h-12 w-12 text-accent-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Your data stays yours
+            </h3>
+            <p class="text-text-secondary">
+              Runs entirely on your machine. Use your own API keys. Optional
+              anonymization for AI analysis. Audit log shows what data you
+              export and where it goes.
+            </p>
+          </div>
+
+          <div class="rounded-lg bg-bg-secondary p-8">
+            <svg
+              class="mb-4 h-12 w-12 text-accent-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
+              ></path>
+            </svg>
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Extend it however you need
+            </h3>
+            <p class="text-text-secondary">
+              Plugin architecture means you're not locked into our feature
+              roadmap. Write plugins in any language. Community builds what they
+              need.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-bg-secondary px-4 py-24 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <h2 class="mb-16 text-center text-4xl font-bold text-text-primary">
+          Desktop app. Your data. Your control.
+        </h2>
+
+        <div class="mb-16 grid gap-8 md:grid-cols-3">
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-lg bg-accent-primary/20"
+            >
+              <svg
+                class="h-8 w-8 text-accent-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text-primary">
+              Source Plugins
+            </h3>
+            <p class="text-sm text-text-secondary">
+              Import data from GitHub, Jira, CSV files, or manual entry
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-lg bg-accent-primary/20"
+            >
+              <svg
+                class="h-8 w-8 text-accent-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text-primary">
+              Processor Plugins
+            </h3>
+            <p class="text-sm text-text-secondary">
+              Analyze with AI, calculate custom metrics, detect anomalies
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-lg bg-accent-primary/20"
+            >
+              <svg
+                class="h-8 w-8 text-accent-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-text-primary">
+              Destination Plugins
+            </h3>
+            <p class="text-sm text-text-secondary">
+              Export to Google Sheets, Slack, PDF reports, or webhooks
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a
+            href="/how-it-works"
+            class="inline-flex items-center gap-2 font-medium text-accent-primary hover:text-accent-primary/80"
+          >
+            Learn more about the architecture
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-24 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <h2 class="mb-6 text-4xl font-bold text-text-primary">
+          Install in 60 seconds
+        </h2>
+        <p class="mb-12 text-text-secondary">
+          Choose your installation method:
+        </p>
+
+        <div class="mb-8">
+          <InstallButton client:load />
+        </div>
+
+        <p class="mt-8 text-sm text-text-tertiary">
+          Then open <code class="rounded bg-bg-tertiary px-2 py-1 font-mono"
+            >localhost:3847</code
+          > in your browser
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

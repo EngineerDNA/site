@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/base-layout.astro';
+import Header from '../components/header.astro';
+import Footer from '../components/footer.astro';
+
+const officialPlugins = [
+  {
+    name: 'GitHub',
+    description:
+      'Track pull requests, review comments, and merge frequency from GitHub repositories.',
+    status: 'Available',
+  },
+  {
+    name: 'GitLab',
+    description:
+      'Monitor merge requests, pipelines, and deployment frequency from GitLab projects.',
+    status: 'Available',
+  },
+  {
+    name: 'Jira',
+    description: 'Connect engineering metrics to Jira issues and sprint data.',
+    status: 'Available',
+  },
+  {
+    name: 'Bitbucket',
+    description:
+      'Analyze pull requests and repository activity from Bitbucket.',
+    status: 'Coming Soon',
+  },
+];
+
+const features = [
+  {
+    title: 'JSON-RPC Protocol',
+    description:
+      'Plugins communicate using standard JSON-RPC 2.0 over stdin/stdout.',
+  },
+  {
+    title: 'Language Agnostic',
+    description: 'Build plugins in any language: Go, Python, Node.js, Rust.',
+  },
+  {
+    title: 'Discovery System',
+    description:
+      'Plugins auto-discovered from ~/.engineerdna/plugins directory.',
+  },
+  {
+    title: 'Provider System',
+    description:
+      'Plugins can implement multiple provider types: Source, Issue, CI/CD.',
+  },
+];
+---
+
+<BaseLayout
+  title="Plugins - EngineerDNA"
+  description="EngineerDNA plugins for GitHub, GitLab, Jira, and more. Build custom plugins with JSON-RPC."
+>
+  <Header />
+
+  <main>
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-16 text-center">
+          <h1 class="mb-6 text-5xl font-bold text-text-primary">Plugins</h1>
+          <p class="mx-auto max-w-2xl text-xl text-text-secondary">
+            Connect EngineerDNA to your engineering tools. Use official plugins
+            or build your own.
+          </p>
+        </div>
+
+        <div class="mb-20">
+          <h2 class="mb-8 text-3xl font-bold text-text-primary">
+            Official Plugins
+          </h2>
+          <div class="grid gap-6 md:grid-cols-2">
+            {
+              officialPlugins.map((plugin) => (
+                <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6 transition-colors hover:border-text-secondary/30">
+                  <div class="mb-3 flex items-center justify-between">
+                    <h3 class="text-xl font-semibold text-text-primary">
+                      {plugin.name}
+                    </h3>
+                    <span
+                      class:list={[
+                        'rounded-full px-3 py-1 text-xs font-medium',
+                        plugin.status === 'Available'
+                          ? 'bg-green-900/30 text-green-400'
+                          : 'bg-yellow-900/30 text-yellow-400',
+                      ]}
+                    >
+                      {plugin.status}
+                    </span>
+                  </div>
+                  <p class="text-text-secondary">{plugin.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mb-20">
+          <h2 class="mb-8 text-3xl font-bold text-text-primary">
+            Plugin System
+          </h2>
+          <div class="grid gap-6 md:grid-cols-2">
+            {
+              features.map((feature) => (
+                <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6">
+                  <h3 class="mb-3 text-xl font-semibold text-text-primary">
+                    {feature.title}
+                  </h3>
+                  <p class="text-text-secondary">{feature.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="rounded-lg bg-bg-secondary p-8">
+          <h2 class="mb-4 text-2xl font-bold text-text-primary">
+            Build Your Own Plugin
+          </h2>
+          <p class="mb-6 text-text-secondary">
+            Create custom plugins to connect EngineerDNA to any tool. Full
+            documentation and examples available on GitHub.
+          </p>
+          <div class="rounded-lg bg-bg-primary p-6">
+            <p class="mb-2 font-mono text-sm text-text-secondary">
+              Example: Install a plugin
+            </p>
+            <code class="block font-mono text-sm text-text-primary">
+              cp plugin.json ~/.engineerdna/plugins/my-plugin/
+            </code>
+          </div>
+          <div class="mt-6">
+            <a
+              href="https://github.com/EngineerDNA/engineerdna/wiki#plugin-development"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary inline-block no-underline"
+            >
+              View Plugin Documentation
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

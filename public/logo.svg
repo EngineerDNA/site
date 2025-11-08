@@ -1,0 +1,6 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple bar chart logo -->
+  <rect x="24" y="64" width="20" height="48" rx="3" fill="#3b82f6"/>
+  <rect x="54" y="40" width="20" height="72" rx="3" fill="#3b82f6"/>
+  <rect x="84" y="52" width="20" height="60" rx="3" fill="#3b82f6"/>
+</svg>

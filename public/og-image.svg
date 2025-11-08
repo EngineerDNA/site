@@ -1,0 +1,20 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+
+  <!-- Simple bar chart logo -->
+  <g transform="translate(320, 220)">
+    <rect x="0" y="60" width="30" height="80" rx="4" fill="#3b82f6"/>
+    <rect x="45" y="30" width="30" height="110" rx="4" fill="#3b82f6"/>
+    <rect x="90" y="45" width="30" height="95" rx="4" fill="#3b82f6"/>
+  </g>
+
+  <!-- EngineerDNA text -->
+  <text x="460" y="315" font-family="Inter, system-ui, sans-serif" font-size="80" font-weight="bold" fill="#e5e5e5">EngineerDNA</text>
+
+  <!-- Tagline -->
+  <text x="460" y="380" font-family="Inter, system-ui, sans-serif" font-size="32" fill="#a3a3a3">Open source engineering metrics</text>
+
+  <!-- Apache 2.0 badge -->
+  <rect x="460" y="420" width="180" height="50" rx="8" fill="#3b82f6"/>
+  <text x="550" y="453" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Apache 2.0</text>
+</svg>
