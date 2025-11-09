@@ -3,58 +3,95 @@ import BaseLayout from '../layouts/base-layout.astro';
 import Header from '../components/header.astro';
 import Footer from '../components/footer.astro';
 
-const officialPlugins = [
+const sourcePlugins = [
   {
     name: 'GitHub',
     description:
-      'Track pull requests, review comments, and merge frequency from GitHub repositories.',
+      'PRs, issues, commits, and reviews via GraphQL API. Supports story points from labels.',
     status: 'Available',
   },
   {
-    name: 'GitLab',
+    name: 'AWS Costs',
     description:
-      'Monitor merge requests, pipelines, and deployment frequency from GitLab projects.',
+      'Daily infrastructure costs and resource usage via Cost Explorer API.',
+    status: 'Available',
+  },
+  {
+    name: 'CSV Import',
+    description:
+      'Flexible column mapping for events, metrics, and attributes. Import from any CSV file.',
     status: 'Available',
   },
   {
     name: 'Jira',
-    description: 'Connect engineering metrics to Jira issues and sprint data.',
+    description: 'Issues, sprints, and project data from Jira.',
+    status: 'Coming Soon',
+  },
+];
+
+const processorPlugins = [
+  {
+    name: 'AI Insights',
+    description:
+      'Multi-provider support (Anthropic Claude, OpenAI GPT, Ollama). BYOK required. Mandatory anonymization.',
+    status: 'Available',
+    badge: 'Optional',
+  },
+];
+
+const destinationPlugins = [
+  {
+    name: 'Google Sheets Export',
+    description:
+      'OAuth 2.0 integration for spreadsheet exports. Scheduled or manual exports.',
     status: 'Available',
   },
   {
-    name: 'Bitbucket',
+    name: 'PDF Export',
     description:
-      'Analyze pull requests and repository activity from Bitbucket.',
+      'Formatted reports with charts and tables. Professional documentation output.',
+    status: 'Available',
+  },
+  {
+    name: 'Markdown Export',
+    description:
+      'Documentation and changelog generation. Plain text format for version control.',
+    status: 'Available',
+  },
+  {
+    name: 'Slack',
+    description: 'Real-time notifications and report delivery to Slack channels.',
     status: 'Coming Soon',
   },
 ];
 
 const features = [
   {
-    title: 'JSON-RPC Protocol',
+    title: 'Three Plugin Types',
     description:
-      'Plugins communicate using standard JSON-RPC 2.0 over stdin/stdout.',
+      'Source (data in), Processor (transforms), Destination (data out). Clear separation of concerns.',
   },
   {
-    title: 'Language Agnostic',
-    description: 'Build plugins in any language: Go, Python, Node.js, Rust.',
+    title: 'JSON-RPC Protocol',
+    description:
+      'Plugins communicate using JSON-RPC 2.0 over stdin/stdout. Subprocess isolation with configurable timeouts.',
+  },
+  {
+    title: 'Plugin SDK for Go',
+    description:
+      'Build plugins in Go with the official SDK. Examples and documentation in GitHub repo.',
   },
   {
     title: 'Discovery System',
     description:
-      'Plugins auto-discovered from ~/.engineerdna/plugins directory.',
-  },
-  {
-    title: 'Provider System',
-    description:
-      'Plugins can implement multiple provider types: Source, Issue, CI/CD.',
+      'Plugins auto-discovered from ~/.engineerdna/plugins/ and ./plugins/ directories.',
   },
 ];
 ---
 
 <BaseLayout
   title="Plugins - EngineerDNA"
-  description="EngineerDNA plugins for GitHub, GitLab, Jira, and more. Build custom plugins with JSON-RPC."
+  description="Built-in plugins for GitHub, AWS Costs, Google Sheets, PDF exports, and more. Extensible plugin SDK for custom integrations."
 >
   <Header />
 
@@ -64,18 +101,22 @@ const features = [
         <div class="mb-16 text-center">
           <h1 class="mb-6 text-5xl font-bold text-text-primary">Plugins</h1>
           <p class="mx-auto max-w-2xl text-xl text-text-secondary">
-            Connect EngineerDNA to your engineering tools. Use official plugins
-            or build your own.
+            Three plugin types: Source (data in), Processor (transforms),
+            Destination (data out). Use built-in plugins or build your own with
+            the SDK.
           </p>
         </div>
 
         <div class="mb-20">
           <h2 class="mb-8 text-3xl font-bold text-text-primary">
-            Official Plugins
+            Source Plugins (Data IN)
           </h2>
+          <p class="mb-8 text-text-secondary">
+            Import events, metrics, and attributes from external systems
+          </p>
           <div class="grid gap-6 md:grid-cols-2">
             {
-              officialPlugins.map((plugin) => (
+              sourcePlugins.map((plugin) => (
                 <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6 transition-colors hover:border-text-secondary/30">
                   <div class="mb-3 flex items-center justify-between">
                     <h3 class="text-xl font-semibold text-text-primary">
@@ -101,7 +142,80 @@ const features = [
 
         <div class="mb-20">
           <h2 class="mb-8 text-3xl font-bold text-text-primary">
-            Plugin System
+            Processor Plugins (Transform)
+          </h2>
+          <p class="mb-8 text-text-secondary">
+            Analyze, transform, and enhance your data
+          </p>
+          <div class="grid gap-6 md:grid-cols-2">
+            {
+              processorPlugins.map((plugin) => (
+                <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6 transition-colors hover:border-text-secondary/30">
+                  <div class="mb-3 flex items-center justify-between">
+                    <h3 class="text-xl font-semibold text-text-primary">
+                      {plugin.name}
+                    </h3>
+                    <div class="flex gap-2">
+                      {plugin.badge && (
+                        <span class="rounded-full bg-accent-primary/20 px-3 py-1 text-xs font-medium text-accent-primary">
+                          {plugin.badge}
+                        </span>
+                      )}
+                      <span
+                        class:list={[
+                          'rounded-full px-3 py-1 text-xs font-medium',
+                          plugin.status === 'Available'
+                            ? 'bg-green-900/30 text-green-400'
+                            : 'bg-yellow-900/30 text-yellow-400',
+                        ]}
+                      >
+                        {plugin.status}
+                      </span>
+                    </div>
+                  </div>
+                  <p class="text-text-secondary">{plugin.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mb-20">
+          <h2 class="mb-8 text-3xl font-bold text-text-primary">
+            Destination Plugins (Data OUT)
+          </h2>
+          <p class="mb-8 text-text-secondary">
+            Export data for stakeholders and reporting
+          </p>
+          <div class="grid gap-6 md:grid-cols-2">
+            {
+              destinationPlugins.map((plugin) => (
+                <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6 transition-colors hover:border-text-secondary/30">
+                  <div class="mb-3 flex items-center justify-between">
+                    <h3 class="text-xl font-semibold text-text-primary">
+                      {plugin.name}
+                    </h3>
+                    <span
+                      class:list={[
+                        'rounded-full px-3 py-1 text-xs font-medium',
+                        plugin.status === 'Available'
+                          ? 'bg-green-900/30 text-green-400'
+                          : 'bg-yellow-900/30 text-yellow-400',
+                      ]}
+                    >
+                      {plugin.status}
+                    </span>
+                  </div>
+                  <p class="text-text-secondary">{plugin.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mb-20">
+          <h2 class="mb-8 text-3xl font-bold text-text-primary">
+            Plugin Architecture
           </h2>
           <div class="grid gap-6 md:grid-cols-2">
             {
@@ -122,25 +236,26 @@ const features = [
             Build Your Own Plugin
           </h2>
           <p class="mb-6 text-text-secondary">
-            Create custom plugins to connect EngineerDNA to any tool. Full
+            Create custom plugins with the Plugin SDK for Go. JSON-RPC over
+            stdin/stdout. Subprocess isolation with configurable timeouts. Full
             documentation and examples available on GitHub.
           </p>
           <div class="rounded-lg bg-bg-primary p-6">
             <p class="mb-2 font-mono text-sm text-text-secondary">
-              Example: Install a plugin
+              Example: Plugin discovery
             </p>
             <code class="block font-mono text-sm text-text-primary">
-              cp plugin.json ~/.engineerdna/plugins/my-plugin/
+              ~/.engineerdna/plugins/my-plugin/plugin.json
             </code>
           </div>
           <div class="mt-6">
             <a
-              href="https://github.com/EngineerDNA/engineerdna/wiki#plugin-development"
+              href="https://github.com/EngineerDNA/engineerdna#plugin-development"
               target="_blank"
               rel="noopener noreferrer"
               class="btn-primary inline-block no-underline"
             >
-              View Plugin Documentation
+              View Plugin SDK Documentation
             </a>
           </div>
         </div>

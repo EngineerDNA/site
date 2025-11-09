@@ -3,135 +3,653 @@ import BaseLayout from '../layouts/base-layout.astro';
 import Header from '../components/header.astro';
 import Footer from '../components/footer.astro';
 import InstallButton from '../components/install-button';
+import TerminalCommand from '../components/terminal-command';
 
-const steps = [
+const roles = [
   {
-    number: 1,
-    title: 'Install EngineerDNA',
-    description:
-      'Download the desktop app using your platform package manager. Takes less than 60 seconds.',
+    id: 'ic',
+    title: 'Individual Contributor',
+    dashboards: ['Personal Performance', 'My Activity'],
+    features: [
+      'Goal & skill tracking',
+      'PR activity and contributions',
+      'Performance review data',
+      'Personal velocity trends',
+    ],
+    useCase: 'Track my performance for 1-on-1s and promo discussions',
   },
   {
-    number: 2,
-    title: 'Launch the App',
-    description:
-      'EngineerDNA starts a local server and opens in your default browser at localhost:3847.',
+    id: 'manager',
+    title: 'Team Lead / Manager',
+    dashboards: [
+      'Command Center',
+      'Weekly Briefing',
+      'Team Performance',
+      'Sprint Planning',
+      'Team Management',
+    ],
+    features: [
+      'Team health dashboard',
+      'Attention items and talking points',
+      '1-on-1 prep data',
+      'Sprint tracking and velocity',
+      'All IC features included',
+    ],
+    useCase: 'Prep for standups and 1-on-1s with data-backed context',
   },
   {
-    number: 3,
-    title: 'Connect Your Tools',
-    description:
-      'Install plugins for GitHub, GitLab, Jira, or build custom integrations using our plugin API.',
+    id: 'director',
+    title: 'Director / VP',
+    dashboards: [
+      'Executive Overview',
+      'Organization Scorecard',
+      'Team Comparison',
+      'Cost & ROI Analysis',
+      'Capacity Planning',
+    ],
+    features: [
+      'Org-wide metrics',
+      'Cost breakdown and ROI',
+      'Timeline estimation',
+      'Team comparison',
+      'All Manager + IC features',
+    ],
+    useCase:
+      'Understand org health and forecast capacity for strategic planning',
   },
   {
-    number: 4,
-    title: 'View Metrics',
-    description:
-      'Real-time dashboard shows pull request analytics, cycle time, and team performance.',
-  },
-];
-
-const architecture = [
-  {
-    title: 'Desktop Application',
-    description:
-      'Native Go application with embedded web server. Runs entirely on your machine.',
-  },
-  {
-    title: 'Browser Interface',
-    description:
-      'React dashboard served from localhost:3847. Modern UI with real-time updates.',
-  },
-  {
-    title: 'Plugin System',
-    description:
-      'Extensible JSON-RPC based plugins. Connect to any tool or build your own.',
-  },
-  {
-    title: 'Local Database',
-    description:
-      'SQLite database for caching metrics. All data stays on your machine.',
+    id: 'admin',
+    title: 'Platform Admin',
+    dashboards: ['System Health', 'Data Management'],
+    features: [
+      'Plugin configuration',
+      'Event stream monitoring',
+      'Unresolved identities',
+      'System alerts',
+      'All Director + Manager + IC features',
+    ],
+    useCase: 'Configure the platform and manage data quality',
   },
 ];
 ---
 
 <BaseLayout
   title="How It Works - EngineerDNA"
-  description="Learn how EngineerDNA works. Desktop app architecture, installation, and plugin system."
+  description="Local web application with role-based dashboards. Installation flow, plugin architecture, privacy-first design, and optional AI features."
 >
   <Header />
 
   <main>
     <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl">
-        <div class="mb-16 text-center">
-          <h1 class="mb-6 text-5xl font-bold text-text-primary">
-            How It Works
-          </h1>
-          <p class="text-xl text-text-secondary">
-            EngineerDNA is a desktop application that runs a local web server.
-            Install, launch, and view metrics in your browser.
-          </p>
-        </div>
+      <div class="mx-auto max-w-4xl text-center">
+        <h1 class="mb-6 text-5xl font-bold text-text-primary">
+          Local web app. Your data. Your dashboards.
+        </h1>
+        <p class="mx-auto max-w-2xl text-xl text-text-secondary">
+          EngineerDNA runs entirely on your machine. Install, configure plugins,
+          view role-based metrics. No servers, no security reviews, no monthly
+          bills.
+        </p>
+      </div>
+    </section>
 
-        <div class="mb-16">
-          <h2 class="mb-8 text-center text-3xl font-bold text-text-primary">
-            Getting Started
-          </h2>
-          <div class="space-y-12">
-            {
-              steps.map((step) => (
-                <div class="flex gap-6">
-                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent-primary text-xl font-bold text-white">
-                    {step.number}
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="mb-2 text-xl font-semibold text-text-primary">
-                      {step.title}
+    <section class="bg-bg-secondary px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="mb-16 text-center text-4xl font-bold text-text-primary">
+          Installation Flow
+        </h2>
+
+        <div class="space-y-16">
+          <div class="flex flex-col gap-8 md:flex-row md:items-center">
+            <div class="flex-1">
+              <div class="mb-4 flex items-center gap-4">
+                <div
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent-primary text-xl font-bold text-white"
+                >
+                  1
+                </div>
+                <h3 class="text-2xl font-semibold text-text-primary">
+                  Install the app
+                </h3>
+              </div>
+              <p class="mb-6 text-text-secondary">
+                Download for macOS, Linux, or Windows. Single binary, no
+                dependencies. Launches web UI at localhost:3847. One command to
+                install, one command to run.
+              </p>
+              <InstallButton client:load />
+            </div>
+            <div class="flex-1">
+              <TerminalCommand client:load />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-8 md:flex-row md:items-center">
+            <div class="flex-1 md:order-last">
+              <div class="mb-4 flex items-center gap-4">
+                <div
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent-primary text-xl font-bold text-white"
+                >
+                  2
+                </div>
+                <h3 class="text-2xl font-semibold text-text-primary">
+                  Select your role
+                </h3>
+              </div>
+              <p class="text-text-secondary">
+                IC, Manager, Director, or Admin. Each role gets different
+                dashboard templates. Auto-created during onboarding. Change
+                anytime in Settings.
+              </p>
+            </div>
+            <div class="flex-1 md:order-first">
+              <div class="aspect-video rounded-lg border border-border bg-bg-tertiary shadow-xl">
+                <div class="flex h-full items-center justify-center p-4 text-center">
+                  <p class="text-text-tertiary">Role selector screenshot</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-8 md:flex-row md:items-center">
+            <div class="flex-1">
+              <div class="mb-4 flex items-center gap-4">
+                <div
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent-primary text-xl font-bold text-white"
+                >
+                  3
+                </div>
+                <h3 class="text-2xl font-semibold text-text-primary">
+                  Configure plugins
+                </h3>
+              </div>
+              <p class="text-text-secondary">
+                Add GitHub, Jira, AWS Costs, or CSV. Enter your API keys (BYOK).
+                Set sync schedule (manual or automatic). Optional anonymization
+                for privacy.
+              </p>
+            </div>
+            <div class="flex-1">
+              <div class="aspect-video rounded-lg border border-border bg-bg-tertiary shadow-xl">
+                <div class="flex h-full items-center justify-center p-4 text-center">
+                  <p class="text-text-tertiary">
+                    Plugin configuration screenshot
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-8 md:flex-row md:items-center">
+            <div class="flex-1 md:order-last">
+              <div class="mb-4 flex items-center gap-4">
+                <div
+                  class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent-primary text-xl font-bold text-white"
+                >
+                  4
+                </div>
+                <h3 class="text-2xl font-semibold text-text-primary">
+                  View your dashboards
+                </h3>
+              </div>
+              <p class="text-text-secondary">
+                Auto-created dashboards based on your role. Customize layouts,
+                add/remove widgets. Automatic updates every 30s-5m. Export to
+                Google Sheets, Slack, or PDF.
+              </p>
+            </div>
+            <div class="flex-1 md:order-first">
+              <div class="aspect-video rounded-lg border border-border bg-bg-tertiary shadow-xl">
+                <div class="flex h-full items-center justify-center p-4 text-center">
+                  <p class="text-text-tertiary">
+                    Manager Command Center screenshot
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <h2 class="mb-6 text-center text-4xl font-bold text-text-primary">
+          Role-Based Workflows
+        </h2>
+        <p class="mx-auto mb-16 max-w-2xl text-center text-text-secondary">
+          Each role gets tailored dashboards and features. Progressive access
+          means higher roles include all lower-level features.
+        </p>
+
+        <div class="space-y-12">
+          {
+            roles.map((role, index) => (
+              <div
+                class={`rounded-lg border border-border ${index % 2 === 0 ? 'bg-bg-secondary' : 'bg-bg-primary'} p-8`}
+              >
+                <div class="grid gap-8 md:grid-cols-2">
+                  <div>
+                    <h3 class="mb-4 text-2xl font-bold text-text-primary">
+                      {role.title}
                     </h3>
-                    <p class="text-text-secondary">{step.description}</p>
+                    <div class="mb-6">
+                      <h4 class="mb-2 text-sm font-semibold uppercase tracking-wide text-accent-secondary">
+                        Dashboards
+                      </h4>
+                      <ul class="space-y-1">
+                        {role.dashboards.map((dashboard) => (
+                          <li class="text-text-secondary">• {dashboard}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div class="mb-6">
+                      <h4 class="mb-2 text-sm font-semibold uppercase tracking-wide text-accent-secondary">
+                        Key Features
+                      </h4>
+                      <ul class="space-y-1">
+                        {role.features.map((feature) => (
+                          <li class="text-text-secondary">• {feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div class="rounded-lg border-l-4 border-accent-primary bg-bg-tertiary/50 p-4">
+                      <p class="text-sm italic text-text-secondary">
+                        "{role.useCase}"
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="aspect-video rounded-lg border border-border bg-bg-tertiary shadow-lg">
+                      <div class="flex h-full items-center justify-center p-4 text-center">
+                        <p class="text-text-tertiary">
+                          {role.title} dashboard screenshot
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))
-            }
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-bg-secondary px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <h2 class="mb-16 text-center text-4xl font-bold text-text-primary">
+          Plugin Architecture
+        </h2>
+
+        <div class="mb-16 text-center">
+          <div
+            class="inline-flex items-center gap-4 rounded-lg border border-border bg-bg-primary p-6"
+          >
+            <div class="text-center">
+              <div
+                class="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-accent-primary/20"
+              >
+                <svg
+                  class="h-6 w-6 text-accent-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  ></path>
+                </svg>
+              </div>
+              <p class="text-sm font-semibold text-text-primary">
+                Source Plugins
+              </p>
+              <p class="text-xs text-text-tertiary">Data IN</p>
+            </div>
+
+            <svg
+              class="h-6 w-6 text-text-tertiary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+
+            <div class="text-center">
+              <div
+                class="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-accent-primary"
+              >
+                <p class="font-mono text-xs font-bold text-white">:3847</p>
+              </div>
+              <p class="text-sm font-semibold text-text-primary">
+                EngineerDNA
+              </p>
+              <p class="text-xs text-text-tertiary">localhost</p>
+            </div>
+
+            <svg
+              class="h-6 w-6 text-text-tertiary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+
+            <div class="text-center">
+              <div
+                class="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-accent-primary/20"
+              >
+                <svg
+                  class="h-6 w-6 text-accent-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <p class="text-sm font-semibold text-text-primary">
+                Processor Plugins
+              </p>
+              <p class="text-xs text-text-tertiary">Transform</p>
+            </div>
+
+            <svg
+              class="h-6 w-6 text-text-tertiary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+
+            <div class="text-center">
+              <div
+                class="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-accent-primary/20"
+              >
+                <svg
+                  class="h-6 w-6 text-accent-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                  ></path>
+                </svg>
+              </div>
+              <p class="text-sm font-semibold text-text-primary">
+                Destination Plugins
+              </p>
+              <p class="text-xs text-text-tertiary">Data OUT</p>
+            </div>
           </div>
         </div>
 
-        <div class="mb-16 rounded-lg bg-bg-secondary p-8 text-center">
-          <h3 class="mb-6 text-2xl font-bold text-text-primary">Install Now</h3>
-          <InstallButton client:load />
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="rounded-lg border border-border bg-bg-primary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Source Plugins (Data IN)
+            </h3>
+            <p class="mb-4 text-sm text-text-secondary">
+              Import events, metrics, and attributes from external systems
+            </p>
+            <ul class="space-y-2 text-sm text-text-tertiary">
+              <li>• GitHub (PRs, issues, commits, reviews)</li>
+              <li>• AWS Costs (daily infrastructure costs)</li>
+              <li>• CSV Import (flexible column mapping)</li>
+              <li>• Jira (coming soon)</li>
+            </ul>
+            <div class="mt-4 rounded bg-bg-tertiary p-3 font-mono text-xs text-text-tertiary">
+              Uses your API keys (BYOK)
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-border bg-bg-primary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Processor Plugins (Transform)
+            </h3>
+            <p class="mb-4 text-sm text-text-secondary">
+              Analyze, transform, and enhance your data
+            </p>
+            <ul class="space-y-2 text-sm text-text-tertiary">
+              <li>• AI Insights (optional, BYOK)</li>
+              <li>• Custom metric calculations</li>
+              <li>• Anomaly detection</li>
+              <li>• Identity matching</li>
+            </ul>
+            <div class="mt-4 rounded bg-bg-tertiary p-3 font-mono text-xs text-text-tertiary">
+              Mandatory anonymization for AI
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-border bg-bg-primary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Destination Plugins (Data OUT)
+            </h3>
+            <p class="mb-4 text-sm text-text-secondary">
+              Export data for stakeholders and reporting
+            </p>
+            <ul class="space-y-2 text-sm text-text-tertiary">
+              <li>• Google Sheets (OAuth 2.0)</li>
+              <li>• PDF Export (formatted reports)</li>
+              <li>• Markdown Export (documentation)</li>
+              <li>• Slack (coming soon)</li>
+            </ul>
+            <div class="mt-4 rounded bg-bg-tertiary p-3 font-mono text-xs text-text-tertiary">
+              Audit log tracks all exports
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 rounded-lg border-l-4 border-accent-primary bg-bg-primary p-6">
+          <h3 class="mb-2 text-lg font-semibold text-text-primary">
+            Build Your Own Plugins
+          </h3>
+          <p class="text-text-secondary">
+            Plugin SDK for Go developers. JSON-RPC over stdin/stdout. Subprocess
+            isolation with configurable timeouts. Plugin discovery from
+            ~/.engineerdna/plugins/ and ./plugins/. See the GitHub repo for SDK
+            documentation and examples.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <h2 class="mb-16 text-center text-4xl font-bold text-text-primary">
+          Privacy & Security Deep Dive
+        </h2>
+
+        <div class="grid gap-8 md:grid-cols-2">
+          <div class="rounded-lg bg-bg-secondary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Localhost-Only Binding
+            </h3>
+            <p class="text-text-secondary">
+              Server binds exclusively to 127.0.0.1:3847. No external network
+              access. Data never leaves your machine unless you explicitly export
+              it via destination plugins.
+            </p>
+          </div>
+
+          <div class="rounded-lg bg-bg-secondary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Encrypted API Key Storage
+            </h3>
+            <p class="text-text-secondary">
+              AES-256-GCM encryption for all API keys and secrets. Master key
+              stored in OS keychain with environment variable fallback. Keys
+              never written to disk in plaintext.
+            </p>
+          </div>
+
+          <div class="rounded-lg bg-bg-secondary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Three Anonymization Strategies
+            </h3>
+            <p class="text-text-secondary">
+              Sequential (User_A, User_B), UUID, or hash. Bidirectional mapping
+              for deanonymization. Required for AI processor plugins. Optional
+              for local analysis.
+            </p>
+          </div>
+
+          <div class="rounded-lg bg-bg-secondary p-6">
+            <h3 class="mb-4 text-xl font-semibold text-text-primary">
+              Comprehensive Audit Log
+            </h3>
+            <p class="text-text-secondary">
+              Every data export logged with timestamp, destination, data
+              summary. Track what data left localhost, when, and where it went.
+              Full transparency for compliance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-bg-secondary px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <h2 class="mb-6 text-center text-4xl font-bold text-text-primary">
+          Optional AI Features
+        </h2>
+        <p class="mx-auto mb-12 max-w-2xl text-center text-text-secondary">
+          AI is completely optional. EngineerDNA works 100% without it.
+        </p>
+
+        <div class="mb-12 rounded-lg border-l-4 border-accent-primary bg-bg-primary p-8">
+          <h3 class="mb-4 text-xl font-semibold text-text-primary">
+            The AI Insights Processor Plugin
+          </h3>
+          <p class="mb-4 text-text-secondary">
+            One of many processor plugins. Requires three things:
+          </p>
+          <ol class="mb-6 space-y-2 pl-6 text-text-secondary">
+            <li>1. Your own API key (Anthropic Claude, OpenAI GPT, or Ollama)</li>
+            <li>2. Explicit anonymization of data before sending</li>
+            <li>3. Opt-in per dashboard widget</li>
+          </ol>
+          <p class="text-text-secondary">
+            All other features work without AI: dashboards, metrics, alerts,
+            goals, forecasting, exports.
+          </p>
         </div>
 
         <div>
-          <h2 class="mb-8 text-center text-3xl font-bold text-text-primary">
-            Architecture
-          </h2>
+          <h3 class="mb-6 text-center text-2xl font-semibold text-text-primary">
+            What AI provides (when enabled)
+          </h3>
           <div class="grid gap-6 md:grid-cols-2">
-            {
-              architecture.map((item) => (
-                <div class="rounded-lg border border-bg-secondary bg-bg-secondary/50 p-6">
-                  <h3 class="mb-3 text-xl font-semibold text-text-primary">
-                    {item.title}
-                  </h3>
-                  <p class="text-text-secondary">{item.description}</p>
-                </div>
-              ))
-            }
+            <div class="rounded-lg border border-border bg-bg-primary p-6">
+              <h4 class="mb-2 font-semibold text-text-primary">
+                Briefing TL;DR
+              </h4>
+              <p class="text-sm text-text-secondary">
+                Summarize team activity for standups and status updates
+              </p>
+            </div>
+            <div class="rounded-lg border border-border bg-bg-primary p-6">
+              <h4 class="mb-2 font-semibold text-text-primary">
+                Talking Points
+              </h4>
+              <p class="text-sm text-text-secondary">
+                Generate discussion topics for 1-on-1s based on metrics
+              </p>
+            </div>
+            <div class="rounded-lg border border-border bg-bg-primary p-6">
+              <h4 class="mb-2 font-semibold text-text-primary">
+                Anomaly Explanations
+              </h4>
+              <p class="text-sm text-text-secondary">
+                AI analyzes metric spikes and suggests potential causes
+              </p>
+            </div>
+            <div class="rounded-lg border border-border bg-bg-primary p-6">
+              <h4 class="mb-2 font-semibold text-text-primary">
+                Action Recommendations
+              </h4>
+              <p class="text-sm text-text-secondary">
+                Suggest follow-up actions based on team health indicators
+              </p>
+            </div>
           </div>
         </div>
 
-        <div
-          class="mt-16 rounded-lg border-l-4 border-accent-primary bg-bg-secondary p-6"
-        >
-          <h3 class="mb-2 text-lg font-semibold text-text-primary">
-            Privacy First
-          </h3>
-          <p class="text-text-secondary">
-            EngineerDNA runs entirely on your machine. No data is sent to
-            external servers. All metrics, plugin data, and configuration stay
-            on localhost:3847.
-          </p>
+        <div class="mt-12 text-center">
+          <div class="inline-flex items-center gap-2 rounded-lg bg-bg-tertiary px-4 py-2 text-sm text-text-tertiary">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <span
+              >Data is anonymized before sending. You control when AI is
+              used.</span
+            >
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <h2 class="mb-6 text-4xl font-bold text-text-primary">
+          Ready to get started?
+        </h2>
+        <p class="mb-12 text-xl text-text-secondary">
+          Install in 60 seconds. No servers, no security reviews, no monthly
+          bills.
+        </p>
+
+        <div class="mb-8">
+          <InstallButton client:load />
+        </div>
+
+        <p class="text-sm text-text-tertiary">
+          Then open <code class="rounded bg-bg-tertiary px-2 py-1 font-mono"
+            >localhost:3847</code
+          > in your browser
+        </p>
       </div>
     </section>
   </main>
